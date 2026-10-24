@@ -156,6 +156,27 @@ document.querySelectorAll('.js-buy-again-button').forEach((button) => {
         cart.updateCartQuantity()
     });
 })
+const searchValue = document.querySelector('.js-search-bar')
+const searchButton = document.querySelector('.js-search-button');
+
+function searchParams (){
+  const searchTerm = searchValue.value.trim()
+
+  if(searchTerm){
+    window.location.href = `amazon.html?search=${encodeURIComponent(searchTerm)}`;
+  }
 }
-    
+document.querySelector('.js-search-bar').addEventListener('keydown', (event) => {
+  if(event.key === 'Enter'){
+    searchParams();
+  }
+})
+
+document.querySelector('.js-search-button').addEventListener('click', () => {
+    searchParams();
+  })
+}
+
+
+
 

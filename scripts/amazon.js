@@ -7,13 +7,42 @@ loadProductsFetch().then(() => {
   renderProductsGrid()
 })
 updateCartQuantity();
-
+ 
 function renderProductsGrid (){
+   const url = new URL(window.location.href);
+   const searchTerm = url.searchParams.get('search');
+ 
 let productsHTML = '';
+if (searchTerm){
+const filteredProducts = products.filter((product) => {
+  return product.name.toLowerCase().includes(searchTerm.toLowerCase());
+});
+
+if(!filteredProducts || filteredProducts.length === 0){
+  productsHTML = `<div class="no-products-found">
+  <p>No products found.</p>
+  </div>`;
+  
+} 
+else if (filteredProducts){
+  filteredProducts.forEach((product) => {
+    productsHTML += renderProduct(product);
+  });
+
+} 
+}
+if (!searchTerm){ 
+  products.forEach((product) => {
+    productsHTML += renderProduct(product);
+  });
 
 
-products.forEach((product) => {
-  productsHTML += `<div class="product-container">
+}
+
+document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
+function renderProduct (product){
+  return `<div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
               src="${product.image}">
@@ -62,12 +91,7 @@ products.forEach((product) => {
           </button>
         </div>`;
 
-
-})
-
-document.querySelector('.js-products-grid').innerHTML = productsHTML;
-
-
+}
 
   
 

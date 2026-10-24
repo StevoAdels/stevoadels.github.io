@@ -165,6 +165,11 @@ fun();
   xhr.send();
 };
 
+export async function loadCartFetch (){
+  const response = await fetch('https://supersimplebackend.dev/cart');
+  const responseText = await response.text();
+  console.log(responseText)
+}
 
 
 
