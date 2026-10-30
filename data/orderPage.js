@@ -172,7 +172,7 @@ document.querySelector('.js-search-bar').addEventListener('keydown', (event) => 
   }
 })
 
-document.querySelector('.js-search-button').addEventListener('click', () => {
+searchButton.addEventListener('click', () => {
     searchParams();
   })
 }
